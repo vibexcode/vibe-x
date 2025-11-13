@@ -1,1 +1,37 @@
+[project]
+name = "vibex"
+version = "1.0.0"
+description = "VIBE-X Protocol: Vector-Integrated Binary Extension for emotional and contextual metadata encoding."
+authors = [
+  { name = "Uğur Kandemiş" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
 
+keywords = [
+    "sentiment-analysis",
+    "metadata",
+    "affective-computing",
+    "nlp",
+    "text-encoding",
+    "protocol"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+
+[project.urls]
+Homepage = "https://github.com/vibexcode/vibe-x-protocol"
+Documentation = "https://github.com/vibexcode/vibe-x-protocol"
+Source = "https://github.com/vibexcode/vibe-x-protocol"
+Issues = "https://github.com/vibexcode/vibe-x-protocol/issues"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
