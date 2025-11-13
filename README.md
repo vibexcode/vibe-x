@@ -379,7 +379,8 @@ If you use VIBE-X in academic work or production systems, please cite:
 ```text
 Kandemiş, U. (2025). VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems.
 "Encode Once, Query Infinitely."
-Zenodo. DOI: <insert DOI here>
+Zenodo. DOI: 10.5281/zenodo.17228992
+
 
 
 ## Contributing
