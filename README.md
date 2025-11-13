@@ -217,7 +217,7 @@ Production deployments are expected to:
 - Maintain lifecycle metadata (timestamp, model version, confidence scores) outside the 14-bit MetaBlock to keep the core encoding compact.
 
 ---
-Installation
+### 9. Installation
 
 VIBE-X can be installed locally as a Python package.
 
@@ -229,8 +229,39 @@ pip install -e .
 
 This installs the package in editable mode, so any changes inside src/vibex/ become available immediately without reinstalling.
 
+# ---------------------------------------------
 
-## 9. USAGE
+### 10. Project Structure
+
+vibe-x/
+│
+├── src/
+│   └── vibex/
+│       ├── __init__.py
+│       ├── inline_encoder.py
+│       ├── inline_decoder.py
+│       ├── metablock.py
+│       ├── tokenizer.py
+│       └── exceptions.py
+│
+├── examples/
+│   ├── basic_encode.py
+│   ├── basic_decode.py
+│   ├── multi_annotation.py
+│   └── error_handling.py
+│
+├── tests/
+│   └── test_basic_flow.py
+│
+├── docs/
+│   └── (overview or specifications)
+│
+├── LICENSE
+├── README.md
+└── pyproject.toml
+
+
+## 11. USAGE
 
 
 # ---------------------------------------------
@@ -334,14 +365,14 @@ except MetaBlockEncodingError as e:
     print("Encoding error caught:", e)
 
 
-## 10. License
+## 12. License
 
 This project is released under the **MIT License**.  
 See the `LICENSE` file for details.
 
 ---
 
-## 11. Citation
+## 13. Citation
 
 If you use VIBE-X in academic work or production systems, please cite:
 
