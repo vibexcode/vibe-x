@@ -1,5 +1,7 @@
 # VIBE-X Protocol  
 **Vector-Integrated Binary Extension — "Encode Once, Query Infinitely."**
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17228992.svg)](https://doi.org/10.5281/zenodo.17228992)
+
 
 VIBE-X is a lightweight binary encoding protocol that attaches sentiment and emotional metadata **directly to or alongside UTF-8 text streams**. By adding a compact 14-bit MetaBlock to sentiment-bearing spans, VIBE-X enables instant emotional queries **without repeatedly calling large NLP models**.
 
@@ -374,12 +376,11 @@ See the `LICENSE` file for details.
 
 ## 13. Citation
 
-If you use VIBE-X in academic work or production systems, please cite:
 
-```text
 Kandemiş, U. (2025). VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems.
 "Encode Once, Query Infinitely."
-Zenodo. DOI: 10.5281/zenodo.17228992
+Zenodo. https://doi.org/10.5281/zenodo.17228992
+
 
 
 
