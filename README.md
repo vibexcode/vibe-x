@@ -380,3 +380,13 @@ If you use VIBE-X in academic work or production systems, please cite:
 Kandemiş, U. (2025). VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems.
 "Encode Once, Query Infinitely."
 Zenodo. DOI: <insert DOI here>
+
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome.
+Feel free to open an issue or submit a pull request.
+
+[![Star on GitHub](https://img.shields.io/github/stars/vibexcode/vibe-x.svg?style=social)](https://github.com/vibexcode/vibe-x/stargazers)
+
+
