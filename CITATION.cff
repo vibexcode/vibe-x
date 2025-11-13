@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: "VIBE-X: Vector-Integrated Binary Extension"
+authors:
+  - family-names: "Kandemiş"
+    given-names: "Uğur"
+abstract: >
+  VIBE-X is a lightweight emotional metadata protocol designed to encode 
+  affective signals directly into natural-language text using compact 
+  binary MetaBlocks. It enables deterministic emotional memory, 
+  energy-efficient querying, and model-independent retrieval across 
+  large-scale NLP, IR, and multi-agent systems.
+
+repository-code: "https://github.com/vibexcode/vibe-x"
+version: "1.0.0"
+date-released: "2025-01-01"
+keywords:
+  - sentiment-analysis
+  - metadata
+  - affective-computing
+  - NLP
+  - binary-encoding
+  - protocol
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Kandemiş"
+      given-names: "Uğur"
+  title: "VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems"
+  year: 2025
+  journal: "Zenodo"
+  doi: "pending"
