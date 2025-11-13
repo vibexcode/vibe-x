@@ -218,14 +218,118 @@ Production deployments are expected to:
 
 ---
 
-## 9. License
+## 9. USAGE
+
+
+# ---------------------------------------------
+# Basic Encoding Example
+# ---------------------------------------------
+from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
+from vibex.tokenizer import Tokenizer
+
+# Initialize encoder with default tokenizer
+encoder = InlineEncoder(tokenizer=Tokenizer())
+
+text = "The movie was absolutely amazing"
+
+# Create an annotation:
+# anchor = token index
+# length = number of tokens spanned
+annotation = SentimentAnnotation(
+    anchor=3,      # "absolutely"
+    length=2,      # covers "absolutely amazing"
+    polarity=2,    # positive
+    intensity=5,   # strong emotion
+    context=0,     # literal
+    emotion=1      # Joy
+)
+
+encoded_text = encoder.encode(text, [annotation])
+print("Encoded:", encoded_text)
+
+# ---------------------------------------------
+# Basic Decoding Example
+# ---------------------------------------------
+from vibex.inline_decoder import InlineDecoder
+from vibex.tokenizer import Tokenizer
+
+decoder = InlineDecoder(tokenizer=Tokenizer())
+
+decoded = decoder.decode(encoded_text)
+
+print("Clean text:", decoded.clean_text)
+print("Clean tokens:", decoded.clean_tokens)
+print("\nDecoded MetaBlocks:")
+for block in decoded.blocks:
+    print(" - HEX:", block.block.to_hex())
+    print("   Span:", block.span)
+    print("   Polarity:", block.block.polarity)
+    print("   Intensity:", block.block.intensity)
+    print("   Emotion:", block.block.emotion)
+# ---------------------------------------------
+# Multiple Annotation Example
+# ---------------------------------------------
+from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
+from vibex.tokenizer import Tokenizer
+
+text = "I loved the performance but the ending felt rushed"
+
+encoder = InlineEncoder(Tokenizer())
+
+annotations = [
+    SentimentAnnotation(
+        anchor=1,      # "loved"
+        length=1,
+        polarity=2,    # positive
+        intensity=6,
+        context=0,
+        emotion=1
+    ),
+    SentimentAnnotation(
+        anchor=7,      # "felt"
+        length=2,      # "felt rushed"
+        polarity=1,    # negative
+        intensity=5,
+        context=1,     # context-dependent
+        emotion=4
+    ),
+]
+
+encoded = encoder.encode(text, annotations)
+print("Encoded:", encoded)
+# ---------------------------------------------
+# Error Handling Example
+# ---------------------------------------------
+from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
+from vibex.exceptions import MetaBlockEncodingError
+from vibex.tokenizer import Tokenizer
+
+encoder = InlineEncoder(Tokenizer())
+text = "This is a short text"
+
+try:
+    # Intentional mistake: anchor index out of token range
+    annotation = SentimentAnnotation(
+        anchor=50,
+        length=1,
+        polarity=1,
+        intensity=3,
+        context=0,
+        emotion=2
+    )
+    encoder.encode(text, [annotation])
+except MetaBlockEncodingError as e:
+    print("Encoding error caught:", e)
+
+
+## 10. License
 
 This project is released under the **MIT License**.  
 See the `LICENSE` file for details.
 
 ---
 
-## 10. Citation
+## 11. Citation
 
 If you use VIBE-X in academic work or production systems, please cite:
 
