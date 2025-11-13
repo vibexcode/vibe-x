@@ -219,15 +219,16 @@ Production deployments are expected to:
 ---
 Installation
 
-VIBE-X Python package is currently distributed as a source repository.
+VIBE-X can be installed locally as a Python package.
 
-Install locally (recommended for development):
-
+Install from source
 git clone https://github.com/vibexcode/vibe-x
-cd vibe-x-protocol
+cd vibe-x
 pip install -e .
 
-This installs the package in editable mode, allowing changes to be applied immediately without reinstalling.
+
+This installs the package in editable mode, so any changes inside src/vibex/ become available immediately without reinstalling.
+
 
 ## 9. USAGE
 
