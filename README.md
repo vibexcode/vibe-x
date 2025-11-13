@@ -217,6 +217,17 @@ Production deployments are expected to:
 - Maintain lifecycle metadata (timestamp, model version, confidence scores) outside the 14-bit MetaBlock to keep the core encoding compact.
 
 ---
+Installation
+
+VIBE-X Python package is currently distributed as a source repository.
+
+Install locally (recommended for development):
+
+git clone https://github.com/vibexcode/vibe-x
+cd vibe-x-protocol
+pip install -e .
+
+This installs the package in editable mode, allowing changes to be applied immediately without reinstalling.
 
 ## 9. USAGE
 
