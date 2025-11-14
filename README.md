@@ -378,11 +378,10 @@ See the `LICENSE` file for details.
 
 ## 13. Citation
 
+If you use VIBE-X in academic or industrial work, please cite:
 
-Kandemiş, U. (2025). VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems.
-"Encode Once, Query Infinitely."
-Zenodo. https://doi.org/10.5281/zenodo.17228992
-
+Kandemiş, U. (2025). *VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems*. Zenodo.  
+DOI: https://doi.org/10.5281/zenodo.17228992
 
 
 
