@@ -1,6 +1,9 @@
 # VIBE-X Protocol  
 **Vector-Integrated Binary Extension — "Encode Once, Query Infinitely."**
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17228992.svg)](https://doi.org/10.5281/zenodo.17228992)
+[![PyPI version](https://img.shields.io/pypi/v/vibex-protocol.svg)](https://pypi.org/project/vibex-protocol/)
+[![Python versions](https://img.shields.io/pypi/pyversions/vibex-protocol.svg)](https://pypi.org/project/vibex-protocol/)
+
 
 
 VIBE-X is a lightweight binary encoding protocol that attaches sentiment and emotional metadata **directly to or alongside UTF-8 text streams**. By adding a compact 14-bit MetaBlock to sentiment-bearing spans, VIBE-X enables instant emotional queries **without repeatedly calling large NLP models**.
