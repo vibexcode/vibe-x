@@ -1,5 +1,5 @@
 [project]
-name = "vibex"
+name = "vibe-x"
 version = "1.0.0"
 description = "VIBE-X Protocol: Vector-Integrated Binary Extension for emotional and contextual metadata encoding."
 authors = [
