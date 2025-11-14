@@ -224,13 +224,12 @@ Production deployments are expected to:
 ---
 ### 9. Installation
 
-VIBE-X can be installed locally as a Python package.
+You can install the official VIBE-X Protocol implementation directly from PyPI:
 
-Install from source
-git clone https://github.com/vibexcode/vibe-x
-cd vibe-x
-pip install -e .
+```bash
+pip install vibex-protocol
 
+This will install the core library, including the encoder, decoder, metadata models, and CLI tool (vibex-cli).
 
 This installs the package in editable mode, so any changes inside src/vibex/ become available immediately without reinstalling.
 
