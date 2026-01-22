@@ -373,14 +373,15 @@ except MetaBlockEncodingError as e:
 
 This project is released under the **MIT License**.  
 See the `LICENSE` file for details.
-
+Uğur KANDEMİŞ (2025)
 ---
 
 ## 13. Citation
 
 If you use VIBE-X in academic or industrial work, please cite:
 
-Kandemiş, U. (2025). *VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems*. Zenodo.  
+Kandemiş, U. (2025).
+*VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems*. Zenodo.  
 DOI: https://doi.org/10.5281/zenodo.17228992
 
 
