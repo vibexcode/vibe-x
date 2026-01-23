@@ -8,6 +8,28 @@
 
 **🎭 [Try Interactive Demo](demo/)** | **📓 [Jupyter Tutorial](demo/interactive_tutorial.ipynb)** | **💡 [Real-World Examples](examples/)**
 
+---
+
+### 📦 Quick Reference
+
+| Aspect | Name |
+|--------|------|
+| **Project Name** | VIBE-X Protocol |
+| **PyPI Package** | `vibex-protocol` |
+| **Python Import** | `vibex` |
+| **CLI Tool** | `vibex-cli` |
+| **Repository** | `vibexcode/vibe-x` |
+
+```bash
+# Installation
+pip install vibex-protocol
+
+# Import in Python
+from vibex import InlineEncoder, InlineDecoder, SentimentAnnotation, Tokenizer
+```
+
+---
+
 
 
 VIBE-X is a lightweight binary encoding protocol that attaches sentiment and emotional metadata **directly to or alongside UTF-8 text streams**. By adding a compact 14-bit MetaBlock to sentiment-bearing spans, VIBE-X enables instant emotional queries **without repeatedly calling large NLP models**.
@@ -283,159 +305,193 @@ Check out practical implementations in the `examples/` directory:
 
 ---
 
-# ---------------------------------------------
+---
 
-### 10. Project Structure
+## 10. Quick Start
 
-vibe-x/
-│
-├── src/
-│   └── vibex/
-│       ├── __init__.py
-│       ├── inline_encoder.py
-│       ├── inline_decoder.py
-│       ├── metablock.py
-│       ├── tokenizer.py
-│       └── exceptions.py
-│
-├── examples/
-│   ├── basic_encode.py
-│   ├── basic_decode.py
-│   ├── multi_annotation.py
-│   └── error_handling.py
-│
-├── tests/
-│   └── test_basic_flow.py
-│
-├── docs/
-│   └── (overview or specifications)
-│
-├── LICENSE
-├── README.md
-└── pyproject.toml
+### Basic Encoding Example
 
+```python
+from vibex import InlineEncoder, SentimentAnnotation, Tokenizer
 
-## 11. USAGE
+# Initialize encoder
+encoder = InlineEncoder(Tokenizer())
 
-
-# ---------------------------------------------
-# Basic Encoding Example
-# ---------------------------------------------
-from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
-from vibex.tokenizer import Tokenizer
-
-# Initialize encoder with default tokenizer
-encoder = InlineEncoder(tokenizer=Tokenizer())
-
+# Your text
 text = "The movie was absolutely amazing"
 
-# Create an annotation:
-# anchor = token index
-# length = number of tokens spanned
+# Create annotation (anchor=3 means "absolutely", length=2 covers "absolutely amazing")
 annotation = SentimentAnnotation(
-    anchor=3,      # "absolutely"
-    length=2,      # covers "absolutely amazing"
-    polarity=2,    # positive
-    intensity=5,   # strong emotion
-    context=0,     # literal
-    emotion=1      # Joy
+    anchor=3,
+    length=2,
+    polarity=2,      # Positive
+    intensity=5,     # Strong emotion
+    context=0,       # Literal
+    emotion=1        # Joy
 )
 
+# Encode
 encoded_text = encoder.encode(text, [annotation])
-print("Encoded:", encoded_text)
+print(encoded_text)
+```
 
-# ---------------------------------------------
-# Basic Decoding Example
-# ---------------------------------------------
-from vibex.inline_decoder import InlineDecoder
-from vibex.tokenizer import Tokenizer
+### Basic Decoding Example
 
-decoder = InlineDecoder(tokenizer=Tokenizer())
+```python
+from vibex import InlineDecoder, Tokenizer
 
+# Initialize decoder
+decoder = InlineDecoder(Tokenizer())
+
+# Decode
 decoded = decoder.decode(encoded_text)
 
 print("Clean text:", decoded.clean_text)
-print("Clean tokens:", decoded.clean_tokens)
-print("\nDecoded MetaBlocks:")
+print("Metadata blocks found:", len(decoded.blocks))
+
+# Access metadata
 for block in decoded.blocks:
-    print(" - HEX:", block.block.to_hex())
-    print("   Span:", block.span)
-    print("   Polarity:", block.block.polarity)
-    print("   Intensity:", block.block.intensity)
-    print("   Emotion:", block.block.emotion)
-# ---------------------------------------------
-# Multiple Annotation Example
-# ---------------------------------------------
-from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
-from vibex.tokenizer import Tokenizer
+    print(f"Polarity: {block.block.polarity}, Intensity: {block.block.intensity}")
+```
+
+**Output:**
+```
+Clean text: The movie was absolutely amazing
+Metadata blocks found: 1
+Polarity: 2, Intensity: 5
+```
+
+---
+
+## 11. Advanced Usage
+
+### Multiple Annotations
+
+```python
+from vibex import InlineEncoder, SentimentAnnotation, Tokenizer
 
 text = "I loved the performance but the ending felt rushed"
-
 encoder = InlineEncoder(Tokenizer())
 
 annotations = [
-    SentimentAnnotation(
-        anchor=1,      # "loved"
-        length=1,
-        polarity=2,    # positive
-        intensity=6,
-        context=0,
-        emotion=1
-    ),
-    SentimentAnnotation(
-        anchor=7,      # "felt"
-        length=2,      # "felt rushed"
-        polarity=1,    # negative
-        intensity=5,
-        context=1,     # context-dependent
-        emotion=4
-    ),
+    SentimentAnnotation(anchor=1, length=1, polarity=2, intensity=6, context=0, emotion=1),  # "loved" - positive
+    SentimentAnnotation(anchor=7, length=2, polarity=1, intensity=5, context=1, emotion=4),  # "felt rushed" - negative
 ]
 
 encoded = encoder.encode(text, annotations)
-print("Encoded:", encoded)
-# ---------------------------------------------
-# Error Handling Example
-# ---------------------------------------------
-from vibex.inline_encoder import InlineEncoder, SentimentAnnotation
+```
+
+### Error Handling
+
+```python
+from vibex import InlineEncoder, SentimentAnnotation, Tokenizer
 from vibex.exceptions import MetaBlockEncodingError
-from vibex.tokenizer import Tokenizer
 
 encoder = InlineEncoder(Tokenizer())
-text = "This is a short text"
+text = "Short text"
 
 try:
-    # Intentional mistake: anchor index out of token range
-    annotation = SentimentAnnotation(
-        anchor=50,
-        length=1,
-        polarity=1,
-        intensity=3,
-        context=0,
-        emotion=2
-    )
+    # Anchor out of range
+    annotation = SentimentAnnotation(anchor=50, length=1, polarity=1, intensity=3, context=0, emotion=2)
     encoder.encode(text, [annotation])
 except MetaBlockEncodingError as e:
-    print("Encoding error caught:", e)
+    print(f"Error: {e}")
+```
+
+### Working with MetaBlocks Directly
+
+```python
+from vibex import MetaBlock
+
+# Create a MetaBlock
+meta = MetaBlock(
+    has_span=True,
+    span=3,
+    polarity=2,       # Positive
+    intensity=7,      # Very strong
+    context=1,        # Dynamic/context-dependent
+    emotion=1,        # Joy
+    emergency=False
+)
+
+# Convert to hex (4 characters)
+hex_code = meta.to_hex()  # e.g., "3E89"
+
+# Decode from hex
+restored = MetaBlock.from_hex(hex_code)
+print(f"Intensity: {restored.intensity}, Emotion: {restored.emotion}")
+```
+
+---
+
+## 12. Project Structure
+
+```
+vibe-x/
+│
+├── src/vibex/              # Core library
+│   ├── __init__.py
+│   ├── inline_encoder.py   # Text encoding with metadata injection
+│   ├── inline_decoder.py   # Metadata extraction
+│   ├── metablock.py        # 14-bit SPICE-R encoding
+│   ├── tokenizer.py        # Whitespace tokenizer
+│   └── exceptions.py       # Custom exceptions
+│
+├── demo/                   # Interactive demos
+│   ├── streamlit_app.py    # Web-based demo
+│   ├── interactive_tutorial.ipynb
+│   └── README.md
+│
+├── examples/               # Real-world examples
+│   ├── basic_encode.py
+│   ├── basic_decode.py
+│   ├── chat_moderation.py
+│   ├── social_media_analysis.py
+│   └── customer_reviews.py
+│
+├── tests/                  # Test suite
+│   ├── test_basic_flow.py
+│   ├── test_edge_cases.py
+│   └── test_performance.py
+│
+├── docs/
+│   └── vibe-x.pdf         # Technical specification
+│
+├── README.md
+├── LICENSE (MIT)
+└── pyproject.toml
+```
 
 
-## 12. License
+---
+
+## 13. License
 
 This project is released under the **MIT License**.  
 See the `LICENSE` file for details.
 
 ---
 
-## 13. Citation
+---
+
+## 14. Citation
 
 If you use VIBE-X in academic or industrial work, please cite:
 
-Kandemiş, U. (2025). *VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems*. Zenodo.  
-DOI: https://doi.org/10.5281/zenodo.17228992
+```bibtex
+@software{kandemis2025vibex,
+  author    = {Kandemiş, Uğur},
+  title     = {VIBE-X: Vector-Integrated Binary Extension for Sentiment-Aware Communication Systems},
+  year      = {2025},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.17228992},
+  url       = {https://doi.org/10.5281/zenodo.17228992}
+}
+```
 
+---
 
-
-## Contributing
+## 15. Contributing
 
 Contributions, issues, and feature requests are welcome.
 Feel free to open an issue or submit a pull request.
