@@ -1,0 +1,13 @@
+# Demo dependencies for VIBE-X
+# Install with: pip install -r requirements-demo.txt
+
+# Streamlit demo
+streamlit>=1.28.0
+
+# Jupyter notebook demo
+jupyter>=1.0.0
+notebook>=7.0.0
+ipywidgets>=8.0.0
+
+# For visualization in demos
+matplotlib>=3.7.0
