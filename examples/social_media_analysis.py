@@ -74,7 +74,7 @@ def analyze_social_media_posts():
         # Post 5: Emergency, fear
         [
             SentimentAnnotation(
-                anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, emergency=True
+                anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, reserved=1
             )
         ],
         # Post 6: Mixed sentiment - positive and negative
@@ -107,7 +107,7 @@ def analyze_social_media_posts():
     print("-" * 70)
     for item in encoded_posts:
         decoded = decoder.decode(item["encoded"])
-        if any(block.block.emergency for block in decoded.blocks):
+        if any(block.block.reserved for block in decoded.blocks):
             post = item["post"]
             print(f"[URGENT] @{post['user']}: {post['text']}")
             print(f"         Timestamp: {post['timestamp']}")
@@ -163,7 +163,7 @@ def analyze_social_media_posts():
     emergency_count = sum(
         1
         for item in encoded_posts
-        if any(block.block.emergency for block in decoder.decode(item["encoded"]).blocks)
+        if any(block.block.reserved for block in decoder.decode(item["encoded"]).blocks)
     )
     negative_count = sum(
         1

@@ -89,7 +89,7 @@ class TestStorageEfficiency:
 
     def test_hex_storage_size(self):
         """Test that hex encoding is compact"""
-        meta = MetaBlock(has_span=True, span=3, polarity=2, intensity=5, context=1, emotion=4, emergency=True)
+        meta = MetaBlock(has_span=True, span=3, polarity=2, intensity=5, context=1, emotion=4, reserved=1)
         hex_val = meta.to_hex()
 
         # Hex should be exactly 4 characters

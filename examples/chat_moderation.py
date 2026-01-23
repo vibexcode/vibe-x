@@ -93,7 +93,7 @@ def simulate_chat_moderation():
         # Message 5: Concerning, sadness (potential mental health flag)
         [
             SentimentAnnotation(
-                anchor=5, length=2, polarity=1, intensity=6, context=0, emotion=5, emergency=True
+                anchor=5, length=2, polarity=1, intensity=6, context=0, emotion=5, reserved=1
             )
         ],
         # Message 6: Harassment, very toxic
@@ -105,7 +105,7 @@ def simulate_chat_moderation():
         # Message 9: Emergency
         [
             SentimentAnnotation(
-                anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, emergency=True
+                anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, reserved=1
             )
         ],
     ]
@@ -134,7 +134,7 @@ def simulate_chat_moderation():
         decoded = decoder.decode(encoded)
 
         # Check for emergency
-        if any(block.block.emergency for block in decoded.blocks):
+        if any(block.block.reserved for block in decoded.blocks):
             print("  🚨 [AUTO-FLAG: EMERGENCY - requires immediate review]")
 
         # Check for high toxicity
@@ -160,7 +160,7 @@ def simulate_chat_moderation():
     emergency_found = False
     for item in encoded_messages:
         decoded = decoder.decode(item["encoded"])
-        if any(block.block.emergency for block in decoded.blocks):
+        if any(block.block.reserved for block in decoded.blocks):
             emergency_found = True
             msg = item["message"]
             print(f"[{msg['timestamp']}] {msg['user']}: {msg['text']}")
@@ -218,7 +218,7 @@ def simulate_chat_moderation():
     emergency = sum(
         1
         for item in encoded_messages
-        if any(block.block.emergency for block in decoder.decode(item["encoded"]).blocks)
+        if any(block.block.reserved for block in decoder.decode(item["encoded"]).blocks)
     )
     toxic = toxic_count
     positive = sum(

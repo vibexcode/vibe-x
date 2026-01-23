@@ -176,11 +176,11 @@ with tab1:
             help="Primary emotion category"
         )
 
-        # Emergency flag
-        emergency = st.checkbox(
-            "Emergency Flag",
+        # Reserved/Emergency flag
+        reserved_flag = st.checkbox(
+            "Reserved Flag (Emergency/Critical)",
             value=False,
-            help="Mark as urgent/critical"
+            help="Mark as urgent/critical (uses reserved bit)"
         )
 
     # Encode button
@@ -195,7 +195,7 @@ with tab1:
                 intensity=intensity,
                 context=context,
                 emotion=emotion,
-                emergency=emergency
+                reserved=int(reserved_flag)
             )
 
             encoded_text = encoder.encode(text_input, [annotation])
@@ -217,7 +217,7 @@ with tab1:
                 st.metric("Context", context_label.split('/')[0])
             with col3:
                 st.metric("Emotion", ["Neutral", "Joy", "Trust", "Fear", "Surprise", "Sadness", "Disgust", "Anger"][emotion])
-                st.metric("Emergency", "Yes" if emergency else "No")
+                st.metric("Reserved Flag", "Yes" if reserved_flag else "No")
 
             # Store in session state for decoding tab
             st.session_state['encoded_text'] = encoded_text
@@ -283,7 +283,7 @@ with tab2:
                             - Intensity: `{block.block.intensity}/7`
                             - Context: `{'Dynamic' if block.block.context else 'Static'}`
                             - Emotion: `{emotion_names[block.block.emotion]}`
-                            - Emergency: `{'Yes' if block.block.emergency else 'No'}`
+                            - Reserved: `{'Yes' if block.block.reserved else 'No'}`
                             """)
 
                         # Visualization

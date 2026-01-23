@@ -26,7 +26,7 @@ class TestMetaBlockEdgeCases:
             intensity=0,
             context=0,
             emotion=0,
-            emergency=False,
+            reserved=0,
         )
         assert meta.to_int() == 0
         assert meta.to_hex() == "0000"
@@ -40,7 +40,7 @@ class TestMetaBlockEdgeCases:
             intensity=7,  # 3 bits max
             context=1,
             emotion=7,  # 3 bits max
-            emergency=True,
+            reserved=1,
         )
         assert meta.to_int() == 16383  # 2^14 - 1
         assert meta.to_hex() == "3fff"
@@ -55,7 +55,7 @@ class TestMetaBlockEdgeCases:
         ]
 
         for has_span, span, polarity, intensity, context, emotion, emergency in test_cases:
-            meta = MetaBlock(has_span, span, polarity, intensity, context, emotion, emergency)
+            meta = MetaBlock(has_span, span, polarity, intensity, context, emotion, reserved)
             hex_val = meta.to_hex()
             restored = MetaBlock.from_hex(hex_val)
             assert meta == restored
@@ -312,12 +312,12 @@ class TestSentimentAnnotationEdgeCases:
             ann = SentimentAnnotation(anchor=0, length=1, polarity=2, intensity=intensity, context=0, emotion=1)
             assert ann.intensity == intensity
 
-    def test_emergency_flag(self):
-        """Test emergency flag"""
+    def test_reserved_flag(self):
+        """Test reserved flag"""
         ann = SentimentAnnotation(
-            anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, emergency=True
+            anchor=0, length=1, polarity=1, intensity=7, context=0, emotion=3, reserved=1
         )
-        assert ann.emergency is True
+        assert ann.reserved is True
 
 
 class TestIntegrationEdgeCases:

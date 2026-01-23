@@ -411,7 +411,7 @@ meta = MetaBlock(
     intensity=7,      # Very strong
     context=1,        # Dynamic/context-dependent
     emotion=1,        # Joy
-    emergency=False
+    reserved=0        # Reserved bit (0=normal, 1=emergency/critical)
 )
 
 # Convert to hex (4 characters)
