@@ -1,8 +1,12 @@
-# VIBE-X Protocol  
+# VIBE-X Protocol
 **Vector-Integrated Binary Extension — "Encode Once, Query Infinitely."**
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17228992.svg)](https://doi.org/10.5281/zenodo.17228992)
 [![PyPI version](https://img.shields.io/pypi/v/vibex-protocol.svg)](https://pypi.org/project/vibex-protocol/)
 [![Python versions](https://img.shields.io/pypi/pyversions/vibex-protocol.svg)](https://pypi.org/project/vibex-protocol/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**🎭 [Try Interactive Demo](demo/)** | **📓 [Jupyter Tutorial](demo/interactive_tutorial.ipynb)** | **💡 [Real-World Examples](examples/)**
 
 
 
@@ -228,10 +232,56 @@ You can install the official VIBE-X Protocol implementation directly from PyPI:
 
 ```bash
 pip install vibex-protocol
+```
 
 This will install the core library, including the encoder, decoder, metadata models, and CLI tool (vibex-cli).
 
-This installs the package in editable mode, so any changes inside src/vibex/ become available immediately without reinstalling.
+---
+
+### 9.1 Try the Interactive Demo
+
+We provide **interactive demos** to help you quickly understand and experiment with VIBE-X:
+
+#### 🎭 Streamlit Web Demo
+
+```bash
+# Install demo dependencies
+pip install -r requirements-demo.txt
+
+# Run the interactive web demo
+streamlit run demo/streamlit_app.py
+```
+
+Open your browser at `http://localhost:8501` to access:
+- **Interactive encoder** with real-time configuration
+- **Metadata decoder** with visualization
+- **Batch analysis** tools
+- **Comprehensive tutorial**
+
+#### 📓 Jupyter Notebook Tutorial
+
+For a deeper dive with step-by-step explanations:
+
+```bash
+# Install dependencies
+pip install -r requirements-demo.txt
+
+# Launch Jupyter
+jupyter notebook demo/interactive_tutorial.ipynb
+```
+
+Or try it online:
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vibexcode/vibe-x/blob/main/demo/interactive_tutorial.ipynb)
+- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vibexcode/vibe-x/main?filepath=demo/interactive_tutorial.ipynb)
+
+#### 💡 Real-World Examples
+
+Check out practical implementations in the `examples/` directory:
+- `chat_moderation.py` — Live chat moderation system
+- `social_media_analysis.py` — Social media sentiment tracking
+- `customer_reviews.py` — E-commerce review analysis
+
+---
 
 # ---------------------------------------------
 
