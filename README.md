@@ -441,6 +441,8 @@ DOI: https://doi.org/10.5281/zenodo.17228992
 Contributions, issues, and feature requests are welcome.
 Feel free to open an issue or submit a pull request.
 
+Note on AI assistance. The research ideas, design decisions and analysis in this repository are mine. I used an AI assistant (Claude, by Anthropic) to help write and refactor code and to draft documentation. I reviewed the results and take responsibility for them.
+
 [![Star on GitHub](https://img.shields.io/github/stars/vibexcode/vibe-x.svg?style=social)](https://github.com/vibexcode/vibe-x/stargazers)
 
 
